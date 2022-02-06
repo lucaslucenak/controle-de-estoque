@@ -1,40 +1,56 @@
+/**
+ * Pacotes:
+ * Express
+ * Sequelize
+ * HandleBars
+ * BodyParser
+ */
+
 const express = require('express');
 const app = express();
+const {engine} = require('express-handlebars');
+const { set } = require('express/lib/application');
+const bodyParser = require('body-parser');
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('db_controleDeEstoque', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql'
-});
+const Produtos = require('../models/Produtos');
 
-sequelize.authenticate().then(function() {
-    console.log('Conectado ao banco de dados com sucesso.')
-}).catch(function(err) {
-    console.log('Error: ' + err.message);
-});
 
-//---------------Criando tabelas---------------
-const tb_users = sequelize.define('tb_users', {
-    username: {
-        type: Sequelize.TEXT
-    },
-    password: {
-        type: Sequelize.TEXT
-    }
-});
-//tb_users.sync({force: true}); //Só pode ser executado uma vez
+//Configuration
+    //Template Engines
+    app.engine('handlebars', engine());
+    app.set('view engine', 'handlebars');
 
-const tb_products = sequelize.define('tb_products', {
-    product: {
-        type: Sequelize.TEXT
-    },
-    quantity: {
-        type: Sequelize.INTEGER
-    }
-});
-//tb_products.sync({force: true}); //Só pode ser executado uma vez
+    //BodyParser
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
 
-//---------------Criar linhas nas tabelas---------------
+
+//--------------------Rotas--------------------//
+
+    //Rota principal
+    app.get("/", (req, res) => {
+        res.render('home');
+    });
+
+    //Rota para cadastrar produto
+    app.get("/cadastroProduto", (req, res) => {
+        res.render('formCadastroProduto');
+    });
+
+    //Rota de recebimento e criação de produto
+    app.post("/receberCadastroProduto", (req, res) => { //app.post só pode ser utilizado se o método post for utilizado
+        Produtos.create({
+            product: req.body.product,
+            quantity: req.body.quantity
+        }).then(function() {
+            res.redirect('/');
+        }).catch(function(err) {
+            res.send("Erro: " + err.message);
+        });
+        
+    });
+
+//---------------Criar linhas nas tabelas---------------//
 /*tb_users.create({
     username: 'admin',
     password: 'admin'
@@ -46,9 +62,7 @@ tb_products.create({
 });*/
 
 
-app.get("/", (req, res) => { //Rota principal
-    res.send("Página inicial do app");
-});
+
 
 app.listen(8083, function() {
     console.log("Rodando o servidor na porta 8083.");
