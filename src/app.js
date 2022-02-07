@@ -43,11 +43,23 @@ const Produtos = require('../models/Produtos');
             product: req.body.product,
             quantity: req.body.quantity
         }).then(function() {
-            res.redirect('/');
+            res.redirect('/estoque');
         }).catch(function(err) {
             res.send("Erro: " + err.message);
         });
         
+    });
+
+    app.get("/estoque", (req, res) => {
+        res.send("Teste")
+
+        /*
+        //Erro aqui!
+        Produtos.all().then(function(allProtudos) {
+            res.render('estoque', {produtos: allProtudos});
+        }).catch(function(err) {
+            res.send("Erro: " + err.message);
+        });*/
     });
 
 //---------------Criar linhas nas tabelas---------------//
