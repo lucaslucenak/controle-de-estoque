@@ -1,2 +1,12 @@
-<h1>Lista de Produtos: </h1>
-{{produtos}}
+<p>Página para exibir todo o conteúdo do estoque</p>
+
+<a href="estoqueCriar"><button>Criar Produto</button></a>
+
+{{#each produtos}}
+    <p><strong>Produto: </strong>{{dataValues.produto}}</p>
+    <p><strong>Quantidade: </strong>{{dataValues.quantidade}}</p>
+    <p><strong>Criado em: </strong>{{dataValues.createdAt}}</p>
+    <p><strong>Atualizado em: </strong>{{dataValues.updatedAt}}</p>
+    <a href="/estoqueDeletar/{{dataValues.id}}"><button>Deletar Produto</button></a>
+    <hr>
+{{/each}}
