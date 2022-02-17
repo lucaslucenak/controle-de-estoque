@@ -1,4 +1,0 @@
-enviar o conteudo da caixa "filtrar produto" para o app.js na linha 61
-fazer o mesmo para a caixa "filtrar categoria"
-resolver o problema que não salva a categoria selecionada do form na rota /estoqueCriar
-fazer a operação update dos produtos; deixar os campos preenchidos

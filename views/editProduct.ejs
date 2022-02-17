@@ -1,0 +1,58 @@
+<%- include ('partials/head.ejs') %>
+
+<main>
+
+
+    <div class="container py-3">
+        <%- include ('partials/header.ejs') %>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="/estoque">Estoque</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Produto</li>
+            </ol>
+        </nav>
+
+        <form class="row g-3 needs-validation" method="POST" action="/makeEdition">
+
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" value="<%= productToEdit.produto %>" placeholder="Produto" name="productNameEdited"
+                        required>
+                    <label for="floatingInput">Produto</label>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input onkeypress="return event.charCode >= 48" min="0" type="number" class="form-control" id="floatingInput" value="<%= productToEdit.quantidade %>" placeholder="productQuantityEdited"
+                        name="productQuantityEdited" required>
+                    <label for="floatingInput">Quantidade</label>
+                </div>
+            </div>
+            
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" value="<%= productToEdit.marca %>" placeholder="Marca" name="productBrandEdited"
+                        required>
+                    <label for="floatingInput">Marca</label>
+                </div>
+            </div>
+
+            <div class="col-12 d-grid">
+                <button class="btn btn-primary" type="submit">Salvar Edição</button>
+            </div>
+
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="hidden" class="form-control" id="floatingInput" value="<%= productToEdit.id %>" placeholder="Produto" name="productId"
+                        required>
+                    <!--<label for="floatingInput">ID</label>-->
+                </div>
+            </div>
+        </form>
+
+        <%- include ('partials/footer.ejs') %>
+    </div>
+</main>

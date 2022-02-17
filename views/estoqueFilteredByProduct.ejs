@@ -1,0 +1,74 @@
+<%- include ('partials/head.ejs') %>
+
+<main>
+
+
+    <div class="container py-3" align="center">
+        <%- include ('partials/header.ejs') %>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="/estoque">Estoque</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Filtro de produto</li>
+            </ol>
+        </nav>
+
+        <%- include ('partials/createProductBox.ejs') %>
+
+        <!--<div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Pesquisar produto" name="pesquisarProduto"
+                    required>
+                <label for="floatingInput">Filtrar produto</label>
+            </div>
+        </div>
+
+        <a href="/estoqueFiltradoProduto"><button class="btn btn-outline-secondary" type="button">Pesquisar produto</button></a>-->
+        <!--<a href="/estoqueFiltradoProduto"><button>Pesquisar produto</button></a>-->
+    
+        <!--<div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Produto" name="produtoFiltro"
+                    required>
+                <label for="floatingInput">Filtrar categoria</label>
+            </div>
+        </div>
+
+        <a href="/estoqueFiltradoCategoria"><button class="btn btn-outline-secondary" type="button">Pesquisar Categoria</button></a>-->
+        <!--<a href="/estoqueFiltradoCategoria"><button>Pesquisar Categoria</button></a>-->
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Quatidade</th>
+                    <th scope="col">Categoria</th>
+                    <!--<th scope="col">Criado em</th>-->
+                    <th scope="col">Atualizado em</th>
+                    <th scope="col">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% produtos.forEach(produto => { %>
+                <tr>
+                    <td><%= produto.produto %></td>
+                    <td><%= produto.marca %></td>
+                    <td><%= produto.quantidade %></td>
+                    <td><%= produto.categoria %></td>
+                    <td><%= produto.updatedAt %></td>
+                    <td>
+                        <!--<a href="#" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Editar</a>-->
+                        <a href="/editProduct/<%= produto.id %>" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Editar</a>
+                        <a href="/estoqueDeletar/<%= produto.id %>" type="button" class="btn btn-light btn-small"><i class="bi bi-trash"></i>Excluir</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+        <%- include ('partials/footer.ejs') %>
+    </div>
+</main>

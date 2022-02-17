@@ -1,0 +1,133 @@
+<%- include ('partials/head.ejs') %>
+
+<main>
+    <div class="container py-3" align="center">
+        <%- include ('partials/header.ejs') %>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Estoque</li>
+            </ol>
+        </nav>
+
+        <%- include ('partials/createProductBox.ejs') %>
+
+        <!--<div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Pesquisar produto" name="pesquisarProduto"
+                    required>
+                <label for="floatingInput">Pesquisar produto</label>
+            </div>
+        </div>-->
+
+        <div class="container">
+            <div class="row">
+
+              <div class="col-sm">
+                <form class="row g-3 needs-validation" method="POST" action="/estoqueFilteredByProduct">
+                    <div class="col-12 d-grid">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Produto" name="productSearchInput"
+                                required>
+                            <label for="floatingInput">Produto</label>
+                        </div>
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button class="btn btn-primary" type="submit">Pesquisar Produto</button>
+                    </div>
+                </form>
+              </div>
+
+              <div class="col-sm">
+                <form class="row g-3 needs-validation" method="POST" action="/estoqueFilteredByCategory">
+                    <div class="col-12 d-grid">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Categoria" name="categorySearchInput"
+                                required>
+                            <label for="floatingInput">Categoria</label>
+                        </div>
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button class="btn btn-primary" type="submit">Pesquisar Categoria</button>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+        <!--<div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Produto" name="produtoFiltro"
+                    required>
+                <label for="floatingInput">Filtrar produto</label>
+            </div>
+        </div>
+        <a href="/estoqueFiltradoProduto"><button class="btn btn-outline-secondary" type="button" name="searchTermProduct">Pesquisar Produto</button></a>-->
+        <!--<a href="/estoqueFiltradoProduto"><button>Pesquisar Produto</button></a>-->
+
+       <!-- <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Produto" name="produtoFiltro"
+                    required>
+                <label for="floatingInput">Filtrar categoria</label>
+            </div>
+        </div>
+
+        <a href="/estoqueFiltradoCategoria"><button class="btn btn-outline-secondary" type="button">Pesquisar
+                Categoria</button></a>-->
+        <!--<a href="/estoqueFiltradoCategoria"><button>Pesquisar Categoria</button></a>-->
+
+
+
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Quatidade</th>
+                        <th scope="col">Categoria</th>
+                        <!--<th scope="col">Criado em</th>-->
+                        <th scope="col">Atualizado em</th>
+                        <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% produtos.forEach(produto => { %>
+                    <tr>
+                        <td><%= produto.produto %></td>
+                        <td><%= produto.marca %></td>
+                        <td><%= produto.quantidade %></td>
+                        <td><%= produto.categoria %></td>
+                        <td><%= produto.updatedAt %></td>
+
+                        <!--<td>{{dataValues.createdAt}}</td>-->
+
+                        <td>
+                            <!--<a href="#" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Editar</a>-->
+
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-sm">
+                                    <a href="/editProduct/<%= produto.id %>" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Editar</a>
+                                </div>
+                                  <div class="col-sm">
+                                    <a href="/estoqueDeletar/<%= produto.id %>" type="button" class="btn btn-light btn-small"><i class="bi bi-trash"></i>Excluir</a>                                  </div>
+                                </div>
+                              </div>
+
+                            <!--<a href="/estoqueDeletar/<%= produto.id %>" type="button" class="btn btn-light btn-small"><i class="bi bi-trash"></i>Excluir</a>-->
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ('partials/footer.ejs') %>
+    </div>
+</main>
